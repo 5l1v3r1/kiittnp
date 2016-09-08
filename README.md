@@ -20,6 +20,7 @@ A script that scraps the [kiittnp](http://kiittnp.in/tnp/usr/index.php) website 
   Extract the zip file.  
   Open command prompt from the repository directory.  
   Type - `pip install -r requirements.txt`  (To install the required modules).  
+  Windows users install "lxml" module from here - [LXML](https://pypi.python.org/packages/cb/b6/848494ec3987338fada4c33644300f43f038490bc34700ce4494d9c7baa0/lxml-3.5.0.win32-py2.7.exe)  
   Then type - `python tnp.py` , or you can run the "tnp.py" script directly.   
   Provide the required details in your console.  
   Congrats ! , the script will run every 15 mins and check for new notices.  
