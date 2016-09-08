@@ -5,7 +5,6 @@ A script that scraps the [kiittnp](http://kiittnp.in/tnp/usr/index.php) website 
   Python 2.7  
   Pip ( refer to this link if not installed - [https://pip.pypa.io/en/latest/installing/](https://pip.pypa.io/en/latest/installing/))  
   Modules : "mechanize", "beautifulsoup4", "requests", "lxml"   
-  "Microsoft Visual C++ Compiler for Python 2.7" [http://aka.ms/vcpython27](http://aka.ms/vcpython27)(If not installed)  
   [IFTTT](https://ifttt.com/) Account  
   Download  "IF by IFTTT" app to your phone.
 
@@ -32,3 +31,4 @@ A script that scraps the [kiittnp](http://kiittnp.in/tnp/usr/index.php) website 
   The user id and password are stored in "creds.txt" file in encoded format(can't be deciphered by Humans :P).  
   The latest notice number is stored in "notice.txt" file.  
   The script is made according to current design of the website, in case the design of the website changes , the script may or may not work , so modify accordingly.  
+  Install "Microsoft Visual C++ Compiler for Python 2.7", if pip fails to install lxml link - [http://aka.ms/vcpython27](http://aka.ms/vcpython27)  
