@@ -13,8 +13,8 @@ cj = cookielib.CookieJar()
 br = mechanize.Browser()
 br.set_cookiejar(cj)
 
-#---- READ the FORMS ----#
-'''
+'''Debug:
+---- READ the FORMS ----
 for form in br.forms():
     print "Form name:", form.name
     print form
@@ -57,7 +57,7 @@ def notices(user,passwd):
     #find the latest notice number:
     s = str(soup.findAll('a')[1])
     
-    #debug:
+    #Debug:
     #print "soup:"+str(soup)
     #print s[22:26]
     #print s    
@@ -137,7 +137,7 @@ def main():
             sys.exit()
         except:
             print "Some Error Occurred!"
-            #raise
+            #raise #For debug
             time.sleep(10)
             print "--Retrying--"
             main()             
