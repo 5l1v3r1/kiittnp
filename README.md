@@ -20,7 +20,8 @@ A script that scraps the [kiittnp](http://kiittnp.in/tnp/usr/index.php) website 
   Extract the zip file.  
   Open command prompt from the repository directory.  
   Type - `pip install -r requirements.txt`  (To install the required modules).  
-  Windows users install "lxml" module from here - [LXML](https://pypi.python.org/packages/cb/b6/848494ec3987338fada4c33644300f43f038490bc34700ce4494d9c7baa0/lxml-3.5.0.win32-py2.7.exe)  
+    
+  **>>_Windows users install "lxml" module from here -_ [LXML](https://pypi.python.org/packages/cb/b6/848494ec3987338fada4c33644300f43f038490bc34700ce4494d9c7baa0/lxml-3.5.0.win32-py2.7.exe)<<**  
   Then type - `python tnp.py` , or you can run the "tnp.py" script directly.   
   Provide the required details in your console.  
   Congrats ! , the script will run every 15 mins and check for new notices.  
@@ -29,6 +30,6 @@ A script that scraps the [kiittnp](http://kiittnp.in/tnp/usr/index.php) website 
   
 ###Note:
   The password input will be invisible to hide from bystanders.  
-  The user id and password are stored in "creds.txt" file in encoded format(can't be deciphered by Humans :P).  
+  The user id and password are stored in "creds.txt" file in encoded format(can't be deciphered by Human Eyes :P).  
   The latest notice number is stored in "notice.txt" file.  
   The script is made according to current design of the website, in case the design of the website changes , the script may or may not work , so modify accordingly.  
