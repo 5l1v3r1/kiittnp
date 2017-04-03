@@ -1,5 +1,3 @@
-__author__='Xplore'
-
 import mechanize
 from bs4 import BeautifulSoup
 import urllib2, urllib
@@ -15,7 +13,6 @@ cj = cookielib.CookieJar()
 br = mechanize.Browser()
 br.set_cookiejar(cj)
 
-count = 1
 #---- READ the FORMS ----#
 '''
 for form in br.forms():
@@ -47,15 +44,23 @@ def creds():
 
 
 def notices(user,passwd):
+    #Openinig the webpage and logging into it:
     br.open("http://kiittnp.in/tnp/usr/index.php")
     br.select_form(nr=0)
     br.form['user_name'] = user
     br.form['password'] = passwd
     br.submit()
+    
+    #Retriving the response and parsing it.
     resp = br.response().read()
-    soup = BeautifulSoup(resp, "lxml")    
+    soup = BeautifulSoup(resp, "lxml")
+    #find the latest notice number:
     s = str(soup.findAll('a')[1])
+    
+    #debug:
+    #print "soup:"+str(soup)
     #print s[22:26]
+    #print s    
     notice_new = int(s[22:26])
     return notice_new
 
@@ -75,59 +80,67 @@ def run(notice_new,notice,urlkey):
         f.close()                
     else:
         print "There is no new notice"
-             
-while(True):        
-    if(os.path.isfile('./notice.txt')==True and os.path.isfile('./creds.txt')==True and os.path.isdir('./notices')==True):
-        nt = open('notice.txt')
-        notice = nt.read()
-        with open('creds.txt', 'r') as f:
-            lines = f.readlines()
-            if(lines[0]!=''):                
-                usertmp = lines[0]
-                passtmp = lines[1]
-                urltmp = lines[2]
-            else:
-                creds()                
-                usertmp = lines[0]
-                passtmp = lines[1]
-                urltmp = lines[2]
-        usertmp = str(decoder(usertmp))
-        passtmp = str(decoder(passtmp))
-        #urltmp = str(decoder(urltmp))
-        notice_new = int(notices(usertmp,passtmp))
-        if(notice!=''):
-            run(notice_new,notice,urltmp)
-            print "END ---------------"+str(count)+"--------------- END"
-            print "Sleeping zzzzzzzzz"
-            count = count+1
-            time.sleep(900)    
-        else:
-            f = open('notice.txt', 'w')
-            f.write(str(notice_new))
-            f.close()
-            
 
-    elif(os.path.isfile('./creds.txt')==False):
-        creds()
-       
-    elif(os.path.isdir('./notices')==False):
-        os.makedirs('notices')
-        
-    elif(os.path.isfile('./notice.txt')==False):
-        with open('creds.txt', 'r') as f:
-            lines = f.readlines()
-            usertmp = lines[0]
-            passtmp = lines[1]            
-        usertmp = str(decoder(usertmp))
-        passtmp = str(decoder(passtmp))        
-        notice_new = int(notices(usertmp,passtmp))
-        f = open('notice.txt', 'w')
-        f.write(str(notice_new))
-        f.close()
-        
-    else:
-        break
-    
-    
+def main():
+    count = 0
+    while(True):
+        try:
+            if(os.path.isfile('./notice.txt')==True and os.path.isfile('./creds.txt')==True and os.path.isdir('./notices')==True):
+                nt = open('notice.txt')
+                notice = nt.read()
+                with open('creds.txt', 'r') as f:
+                    lines = f.readlines()
+                    if(lines[0]!=''):                
+                        usertmp = lines[0]
+                        passtmp = lines[1]
+                        urltmp = lines[2]
+                    else:
+                        creds()                
+                        usertmp = lines[0]
+                        passtmp = lines[1]
+                        urltmp = lines[2]
+                usertmp = str(decoder(usertmp))
+                passtmp = str(decoder(passtmp))
+                #urltmp = str(decoder(urltmp))
+                notice_new = int(notices(usertmp,passtmp))
+                if(notice!=''):
+                    run(notice_new,notice,urltmp)
+                    print "END ---------------"+str(count)+"--------------- END"
+                    print "Sleeping zzzzzzzzz"
+                    count = count+1
+                    time.sleep(900)    
+                else:
+                    f = open('notice.txt', 'w')
+                    f.write(str(notice_new))
+                    f.close()
+                    
 
+            elif(os.path.isfile('./creds.txt')==False):
+                creds()               
+            elif(os.path.isdir('./notices')==False):
+                os.makedirs('notices')
+                
+            elif(os.path.isfile('./notice.txt')==False):
+                with open('creds.txt', 'r') as f:
+                    lines = f.readlines()
+                    usertmp = lines[0]
+                    passtmp = lines[1]            
+                usertmp = str(decoder(usertmp))
+                passtmp = str(decoder(passtmp))        
+                notice_new = int(notices(usertmp,passtmp))
+                f = open('notice.txt', 'w')
+                f.write(str(notice_new))
+                f.close()
 
+        except KeyboardInterrupt:
+            print "CTRL+C detected!\n---Exiting---"
+            sys.exit()
+        except:
+            print "Some Error Occurred!"
+            #raise
+            time.sleep(10)
+            print "--Retrying--"
+            main()             
+
+if __name__=='__main__':
+    main()
