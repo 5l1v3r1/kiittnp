@@ -4,29 +4,29 @@ import urllib2, urllib
 import cookielib
 from lxml import *
 import requests
-import os
-import sys
+import os,sys
 import time
 import getpass
 
 
 cj = cookielib.CookieJar()
 br = mechanize.Browser()
+br.addheaders = [('User-agent','Mozilla/5.0 (X11; Linux x86_64; rv:18.0)Gecko/20100101 Firefox/18.0 (compatible;)'),('Accept', '*/*')]
 br.set_cookiejar(cj)
-
-'''Debug:
----- READ the FORMS ----
+br.set_handle_robots(False)
+br.set_handle_equiv(False)
+'''
+#Debug:
+#---- READ the FORMS ----#
 for form in br.forms():
     print "Form name:", form.name
     print form
 '''
 def encoder(str):
-    str = str.encode('base64','strict')
-    return str
+    return str.encode('base64','strict')
 
 def decoder(str):
-    str = str.decode('base64','strict')
-    return str
+    return str.decode('base64','strict')
 
 def creds():
     user = str(raw_input("Enter User id only:"))
@@ -141,7 +141,7 @@ def main():
             #raise #For debug
             time.sleep(10)
             print "--Retrying--"
-            main()             
+            pass
 
 if __name__=='__main__':
     main()
